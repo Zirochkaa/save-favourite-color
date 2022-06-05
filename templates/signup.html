@@ -1,0 +1,35 @@
+{% extends "structure.html" %}
+
+{% block main %}
+<div class="form-signup m-auto">
+    <form action="/signup" method="post">
+        <h3 class="mb-3 color-text">Please sign up</h3>
+
+        <div class="form-group mb-3">
+            <label class="color-text" for="signupUsername">Username</label>
+            <input type="text" name="username" class="form-control" id="signupUsername" placeholder="put username here">
+        </div>
+
+        <div class="form-group mb-3">
+            <label class="color-text" for="signupColor">Select color</label>
+            <select class="form-select" name="color" id="signupColor">
+                {% for color in colors %}
+                    <option value="{{ color }}">{{ color }}</option>
+                {% endfor %}
+                <option value="gold">gold</option>
+            </select>
+        </div>
+
+        <div class="form-group mb-3">
+            <label class="color-text" for="signupPassword">Password</label>
+            <input type="password" name="password" class="form-control" id="signupPassword" placeholder="put password here">
+        </div>
+
+        {% if message %}
+            <p class="text-bg-danger">{{ message }}</p>
+        {% endif %}
+
+        <button class="w-100 btn btn-lg" style="color:#337def;background-color:#fcc729" type="submit">Sign up</button>
+    </form>
+</div>
+{% endblock main %}
