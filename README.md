@@ -2,6 +2,8 @@
 
 This repository contains final project for `Full Stack Web Development with Flask` course from [pirple.com](https://www.pirple.com/) website.
 
+Link to the working site is [here](https://save-favourite-color-viu5s.ondigitalocean.app/).
+
 ## Features
 
 Right now the site offers the following features:
