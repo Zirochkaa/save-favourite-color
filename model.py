@@ -19,7 +19,7 @@ def get_all_colors():
     """Select all available colors from `colors` table."""
     with closing(sqlite3.connect(DATABASE_NAME, check_same_thread=False)) as connection:
         with closing(connection.cursor()) as cursor:
-            cursor.execute(f"SELECT color FROM colors WHERE is_active=true ORDER BY pk;")
+            cursor.execute(f"SELECT color FROM colors WHERE is_active=1 ORDER BY pk;")
             colors = cursor.fetchall()
             yield from map(lambda color: color[0], colors)
 
@@ -28,7 +28,7 @@ def check_color_exists(color: str) -> bool:
     """Check that `color` is presented in `colors` table."""
     with closing(sqlite3.connect(DATABASE_NAME, check_same_thread=False)) as connection:
         with closing(connection.cursor()) as cursor:
-            cursor.execute(f"SELECT color FROM colors WHERE is_active=true AND color='{color}' ORDER BY pk;")
+            cursor.execute(f"SELECT color FROM colors WHERE is_active=1 AND color='{color}' ORDER BY pk;")
             result = cursor.fetchone()
             return True if result else False
 
