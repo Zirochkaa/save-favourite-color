@@ -120,3 +120,6 @@ dmypy.json
 
 # PyCharm
 .idea/
+
+# SQLite3
+*.db
