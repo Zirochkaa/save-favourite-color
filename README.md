@@ -2,19 +2,43 @@
 
 This repository contains final project for `Full Stack Web Development with Flask` course from [pirple.com](https://www.pirple.com/) website.
 
-Link to the working site is [here](https://save-favourite-color-viu5s.ondigitalocean.app/).
+### Link to the working site is [here](https://save-favourite-color-viu5s.ondigitalocean.app/).
+
+## Run project locally
+
+1. Setup and activate your local python environment. [Here](https://www.digitalocean.com/community/tutorial_series/how-to-install-and-set-up-a-local-programming-environment-for-python-3) are some guides on how to do it.
+2. Create database with tables in SQLite:
+   ```python 
+   python schema.py
+   ```
+   `flask_tut.db` file will be created inside project forled.
+3. Fill database with data:
+   ```python 
+   python seed.py
+   ```
+4. Run application:
+   ```python 
+   python run.py
+   ```
+5. Go to [127.0.0.1:7000](http://127.0.0.1:7000) in your web browser.
 
 ## Features
 
-Right now the site offers the following features:
-- register new users;
-- login to user's account;
-- logout from user's account;
-- 404 page;
+Right now the site offers following features:
+- [x] Register new users.
+- [x] Login into user's account.
+- [x] Logout from user's account.
+- [x] For unknown urls show 404 page.
+- [ ] Admin accounts:
+  - [ ] Admins can see a list of all users with their info on admin's homepage instead of info about color like regular users see.
+  - [ ] Admins can add new colors to database from admin's homepage.
+  - [ ] Admins can deactivate users from admin's homepage.
+- [ ] Share link to user's favourite color.
 
 ## TODOs
 
 Below is a list of what needs to be done:
+- [ ] Migrate from SQLite to PostgreSQL
 - [ ] Let users edit their favourite color.
 - [ ] Cover following with tests:
   - [ ] `model.py` file.
