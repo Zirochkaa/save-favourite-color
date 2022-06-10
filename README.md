@@ -11,7 +11,7 @@ This repository contains final project for `Full Stack Web Development with Flas
    ```python 
    python schema.py
    ```
-   `flask_tut.db` file will be created inside project forled.
+   `flask_tut.db` file will be created inside project folder.
 3. Fill database with data:
    ```python 
    python seed.py
