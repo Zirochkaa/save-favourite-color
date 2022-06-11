@@ -1,9 +1,5 @@
-from flask import Flask, render_template, request, session, redirect, url_for
-import model
-
-
-app = Flask(__name__)
-app.secret_key = "anythingilike"
+from flask import render_template, request, session, redirect, url_for
+from app import app, model
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -79,7 +75,3 @@ def signup():
 def invalid_route(e):
     username = session["username"] if "username" in session else None
     return render_template("404_page.html", username=username)
-
-
-if __name__ == "__main__":
-    app.run(port=7000, debug=True)
