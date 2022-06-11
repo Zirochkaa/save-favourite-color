@@ -7,20 +7,30 @@ This repository contains final project for `Full Stack Web Development with Flas
 ## Run project locally
 
 1. Setup and activate your local python environment. [Here](https://www.digitalocean.com/community/tutorial_series/how-to-install-and-set-up-a-local-programming-environment-for-python-3) are some guides on how to do it.
-2. Create database with tables in SQLite:
-   ```python 
-   python schema.py
+2. Install requirements:
+   ```shell 
+   pip install requirements.txt
    ```
-   `flask_tut.db` file will be created inside project folder.
-3. Fill database with data:
-   ```python 
-   python seed.py
+3. Create SQLite database with tables:
+   ```shell 
+   python app/schema.py
    ```
-4. Run application:
-   ```python 
-   python run.py
+   `flask_tut.db` file will be created inside project root folder.
+4. Fill database with data:
+   ```bash 
+   python app/seed.py
    ```
-5. Go to [127.0.0.1:7000](http://127.0.0.1:7000) in your web browser.
+5. Export flask env variables:
+   ```shell 
+   export FLASK_APP=app
+   export FLASK_ENV=development
+   ```
+
+7. Run application:
+   ```shell 
+   flask run
+   ```
+8. Go to [127.0.0.1:7000](http://127.0.0.1:7000) in your web browser.
 
 ## Features
 
