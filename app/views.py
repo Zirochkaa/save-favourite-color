@@ -1,12 +1,12 @@
 from flask import render_template, request, session, redirect, url_for
-from app import app, model
+from app import app, sqlite_model
 
 
 @app.route("/", methods=["GET", "POST"])
 def home():
     if "username" in session:
         username = session["username"]
-        color = model.get_color_for_user(username=username)
+        color = sqlite_model.get_color_for_user(username=username)
         return render_template("homepage.html", username=username, color=color)
 
     return render_template("index.html")
@@ -26,7 +26,7 @@ def login():
         if not username or not username.strip() or not password or not password.strip():
             return render_template("login.html", message=f"Username/password can't be empty")
 
-        if model.check_user_exists(username=username, password=password) is False:
+        if sqlite_model.check_user_exists(username=username, password=password) is False:
             return render_template("login.html", message=f"User with such username/password doesn't exist")
 
         session["username"] = username
@@ -47,7 +47,7 @@ def signup():
     if "username" in session:
         return redirect(url_for("home"))
 
-    colors = model.get_all_colors()
+    colors = sqlite_model.get_all_colors()
     if request.method == "GET":
         return render_template("signup.html", colors=colors)
 
@@ -60,11 +60,11 @@ def signup():
         return render_template("signup.html", colors=colors, message=f"Username/password can't be empty")
 
     # Since we had limited amount of colors, we need to check that color we got in form is from that limited amount.
-    if model.check_color_exists(color=favourite_color) is False:
+    if sqlite_model.check_color_exists(color=favourite_color) is False:
         return render_template("signup.html", colors=colors, message=f"We don't support '{favourite_color}' color yet")
 
     # Check that user with this username already exists.
-    signed_up = model.signup(username=username, password=password, favourite_color=favourite_color)
+    signed_up = sqlite_model.signup(username=username, password=password, favourite_color=favourite_color)
     if signed_up is False:
         return render_template("signup.html", colors=colors, message="User with such username already exist")
 
