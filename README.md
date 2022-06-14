@@ -55,11 +55,7 @@ Right now the site offers following features:
 Below is a list of what needs to be done:
 - [x] Migrate from SQLite to PostgreSQL
 - [ ] Let users edit their favourite color.
-- [ ] Cover following with tests:
-  - [ ] `model.py` file.
-  - [ ] `run.py` file.
-  - [ ] `schema.py` file.
-  - [ ] `seed.py` files.
+- [ ] Cover project with tests.
 - [ ] Run tests on github.
 - [ ] Add admin accounts:
   - [ ] Add `is_admin` field to `users` table or create completely different table for admins.
