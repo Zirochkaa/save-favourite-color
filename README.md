@@ -6,26 +6,31 @@ This repository contains final project for `Full Stack Web Development with Flas
 
 ## Run project locally
 
-1. Setup and activate your local python environment. [Here](https://www.digitalocean.com/community/tutorial_series/how-to-install-and-set-up-a-local-programming-environment-for-python-3) are some guides on how to do it.
+1. Setup and activate your local python environment. [Here](https://www.digitalocean.com/community/tutorial_series/how-to-install-and-set-up-a-local-programming-environment-for-python-3) are few guides on how to do it.
 2. Install requirements:
    ```shell 
    pip install requirements.txt
    ```
-3. Create SQLite database with tables:
+3. Create `.env` file:
    ```shell 
-   python app/schema.py
+   cp app/.env.template app/.env
    ```
-   `flask_tut.db` file will be created inside project root folder.
-4. Fill database with data:
-   ```bash 
-   python app/seed.py
-   ```
-5. Export flask env variables:
-   ```shell 
-   export FLASK_APP=app
-   export FLASK_ENV=development
-   ```
+4. Setup PostgreSQL. You have few options:
 
+    4.1. you can use any already existing PostgreSQL (in docker, in any cloud provider, etc):
+      1. create new database;
+      2. update `DATABASE_URL` in `.env` file;
+
+    4.2. you can setup PostgreSQL locally:
+      1. for example, you can use [this](https://www.sqlshack.com/setting-up-a-postgresql-database-on-mac/) guide or any other guide;
+      2. after setting up PostgreSQL locally create new database:
+         ```shell 
+         psql postgres -c 'create database save_favourite_color;'
+         ```
+6. Apply migrations to your database:
+   ```shell 
+   flask db upgrade
+   ```
 7. Run application:
    ```shell 
    flask run
@@ -48,7 +53,7 @@ Right now the site offers following features:
 ## TODOs
 
 Below is a list of what needs to be done:
-- [ ] Migrate from SQLite to PostgreSQL
+- [x] Migrate from SQLite to PostgreSQL
 - [ ] Let users edit their favourite color.
 - [ ] Cover following with tests:
   - [ ] `model.py` file.
