@@ -28,8 +28,8 @@ def create_app():
     from .models import User
 
     @login_manager.user_loader
-    def load_user(username: str):
-        return User.query.filter_by(username=username).first()
+    def load_user(user_id: int):
+        return User.query.get(user_id)
 
     # blueprint for auth routes in our app
     from app.views.auth import auth as auth_blueprint

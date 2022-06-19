@@ -45,8 +45,8 @@ class User(UserMixin, db.Model):
     def __str__(self):
         return self.username
 
-    def get_id(self) -> str:
-        return self.username
+    def get_id(self) -> int:
+        return self.id
 
     def check_password(self, password: str) -> bool:
         return self.password == password
