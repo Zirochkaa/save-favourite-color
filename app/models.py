@@ -1,7 +1,8 @@
 from __future__ import annotations
 from typing import Optional, List
+from flask_login import UserMixin
 from sqlalchemy import ForeignKey
-from app import db
+from . import db
 
 
 class Color(db.Model):
@@ -29,7 +30,7 @@ class Color(db.Model):
         return cls.query.filter(cls.is_active.is_(True)).all()
 
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -44,24 +45,14 @@ class User(db.Model):
     def __str__(self):
         return self.username
 
-    @classmethod
-    def check_exists(cls, username: str, password: str) -> Optional[User]:
-        return cls.query.filter(cls.username == username, cls.password == password).first()
+    def get_id(self) -> str:
+        return self.username
+
+    def check_password(self, password: str) -> bool:
+        return self.password == password
 
     @classmethod
-    def check_username_exists(cls, username: str) -> bool:
-        return True if cls.query.filter(cls.username == username).first() else False
-
-    @classmethod
-    def get_favourite_color(cls, username: str) -> Optional[str]:
-        user = cls.query.filter(cls.username == username).first()
-        return user.favourite_color if user else None
-
-    @classmethod
-    def signup(cls, username: str, password: str, favourite_color: str = "", is_active: bool = True) -> Optional[User]:
-        if cls.check_username_exists(username=username):
-            return None
-
+    def signup(cls, username: str, password: str, favourite_color: str = "", is_active: bool = True) -> User:
         user = cls(username=username, password=password, favourite_color=favourite_color, is_active=is_active)
         db.session.add(user)
         db.session.commit()

@@ -25,9 +25,11 @@
             <input type="password" name="password" class="form-control" id="signupPassword" placeholder="put password here">
         </div>
 
-        {% if message %}
-            <p class="text-bg-danger">{{ message }}</p>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <p class="text-bg-danger">{{ messages[0] }}</p>
         {% endif %}
+        {% endwith %}
 
         <button class="w-100 btn btn-lg" style="color:#337def;background-color:#fcc729" type="submit">Sign up</button>
     </form>
