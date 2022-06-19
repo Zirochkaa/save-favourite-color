@@ -1,25 +1,25 @@
 {% extends "structure.html" %}
 
 {% block login %}
-    {% if username is none %}
+    {% if not current_user.is_authenticated %}
         {% include 'pieces/login.html' %}
     {% endif %}
 {% endblock login %}
 
 {% block signup %}
-    {% if username is none %}
+    {% if not current_user.is_authenticated %}
         {% include 'pieces/signup.html' %}
     {% endif %}
 {% endblock signup %}
 
 {% block nav_greeting %}
-    {% if username is not none %}
+    {% if current_user.is_authenticated %}
         {% include 'pieces/nav_greeting.html' %}
     {% endif %}
 {% endblock nav_greeting %}
 
 {% block logout %}
-    {% if username is not none %}
+    {% if current_user.is_authenticated %}
         {% include 'pieces/logout.html' %}
     {% endif %}
 {% endblock logout %}

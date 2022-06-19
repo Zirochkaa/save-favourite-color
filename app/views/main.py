@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from flask_login import login_required, current_user
+from flask_login import login_required
 
 
 main = Blueprint("main", __name__)
@@ -13,9 +13,9 @@ def home():
 @main.route("/profile", methods=["GET"])
 @login_required
 def profile():
-    return render_template("profile.html", username=current_user.username, color=current_user.favourite_color)
+    return render_template("profile.html")
 
 
 @main.app_errorhandler(404)
 def invalid_route(e):
-    return render_template("404_page.html", username=getattr(current_user, "username", None)), 404
+    return render_template("404_page.html"), 404

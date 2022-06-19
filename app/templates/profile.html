@@ -16,12 +16,8 @@
 
 {% block main %}
 <div class="content m-auto">
-    {% if color %}
-        <h3 class="color-text">Your favourite color is {{ color }}.</h3>
-        <div class="color-box m-auto" style="background-color:{{ color }};position:relative;max-width:500px;height:100px;"></div>
+    <h3 class="color-text">Your favourite color is {{ current_user.favourite_color }}.</h3>
+    <div class="color-box m-auto" style="background-color:{{ current_user.favourite_color }};position:relative;max-width:500px;height:100px;"></div>
     <!--    <img class="giphy-gif-img giphy-img-loaded" src="https://media1.giphy.com/media/hTBdZxUHG2r0XwLFSL/200w.gif?cid=ecf05e47jldduenb9xxroxu5h1mgsl8sjjawhry2bc1jusmr&amp;rid=200w.gif&amp;ct=g" width="248" height="248" alt="Close-Up Landscape GIF by xponentialdesign" style="background: rgb(0, 204, 255);">-->
-    {% else %}
-        <h3>Unfortunately, you don't have any color saved.</h3>
-    {% endif %}
 </div>
 {% endblock main %}
