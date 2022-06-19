@@ -54,7 +54,7 @@ Right now the site offers following features:
 
 Below is a list of what needs to be done:
 - [x] Migrate from SQLite to PostgreSQL
-- [ ] Let users edit their favourite color.
+- [x] Let users edit their favourite color.
 - [ ] Cover project with tests.
 - [ ] Run tests on github.
 - [ ] Add admin accounts:

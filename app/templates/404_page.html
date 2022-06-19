@@ -18,6 +18,12 @@
     {% endif %}
 {% endblock nav_greeting %}
 
+{% block settings %}
+    {% if current_user.is_authenticated %}
+        {% include 'pieces/settings.html' %}
+    {% endif %}
+{% endblock settings %}
+
 {% block logout %}
     {% if current_user.is_authenticated %}
         {% include 'pieces/logout.html' %}

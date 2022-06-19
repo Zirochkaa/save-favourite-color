@@ -49,8 +49,7 @@ def signup():
     if current_user.is_authenticated is True:
         return redirect(url_for("main.profile"))
 
-    colors = Color.get_all_active_colors()
-    return render_template("signup.html", colors=colors)
+    return render_template("signup.html", colors=Color.get_all_active_colors())
 
 
 @auth.route("/signup", methods=["POST"])

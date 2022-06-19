@@ -27,7 +27,7 @@ class Color(db.Model):
 
     @classmethod
     def get_all_active_colors(cls) -> List[Color]:
-        return cls.query.filter(cls.is_active.is_(True)).all()
+        return cls.query.filter(cls.is_active.is_(True)).order_by(cls.color.asc()).all()
 
 
 class User(UserMixin, db.Model):
@@ -50,6 +50,11 @@ class User(UserMixin, db.Model):
 
     def check_password(self, password: str) -> bool:
         return self.password == password
+
+    def save_favourite_color(self, favourite_color: str):
+        self.favourite_color = favourite_color
+        db.session.add(self)
+        db.session.commit()
 
     @classmethod
     def signup(cls, username: str, password: str, favourite_color: str = "", is_active: bool = True) -> User:
