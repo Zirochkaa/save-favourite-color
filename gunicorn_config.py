@@ -1,3 +1,3 @@
-bind = "0.0.0.0:8081"
-workers = 9
-threads = 10
+bind = "0.0.0.0:8080"
+workers = 3
+threads = 5
