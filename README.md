@@ -1,3 +1,5 @@
+[![pytest](https://github.com/Zirochkaa/save-favourite-color/actions/workflows/run_tests.yml/badge.svg?branch=master)](https://github.com/Zirochkaa/save-favourite-color/actions/workflows/run_tests.yml)
+
 # Save favourite color
 
 This repository contains final project for `Full Stack Web Development with Flask` course from [pirple.com](https://www.pirple.com/) website.
@@ -70,7 +72,7 @@ Below is a list of what needs to be done:
 - [x] Migrate from SQLite to PostgreSQL
 - [x] Let users edit their favourite color.
 - [x] Cover project with tests.
-- [ ] Run tests on github.
+- [x] Run tests on github.
 - [ ] Add admin accounts:
   - [ ] Add `is_admin` field to `users` table or create completely different table for admins.
   - [ ] Admin homepage should look different:
