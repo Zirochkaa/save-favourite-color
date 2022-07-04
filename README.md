@@ -27,15 +27,27 @@ This repository contains final project for `Full Stack Web Development with Flas
          ```shell 
          psql postgres -c 'create database save_favourite_color;'
          ```
-6. Apply migrations to your database:
+5. Apply migrations to your database:
    ```shell 
    flask db upgrade
    ```
-7. Run application:
+6. Run application:
    ```shell 
    flask run
    ```
-8. Go to [127.0.0.1:5000](http://127.0.0.1:5000) in your web browser.
+7. Go to [127.0.0.1:5000](http://127.0.0.1:5000) in your web browser.
+
+## Tests
+
+To run tests use following command:
+   ```shell 
+   python -m pytest
+   ```
+
+If you want to check code coverage use following command:
+   ```shell 
+   python -m pytest --cov=app
+   ```
 
 ## Features
 
@@ -55,7 +67,7 @@ Right now the site offers following features:
 Below is a list of what needs to be done:
 - [x] Migrate from SQLite to PostgreSQL
 - [x] Let users edit their favourite color.
-- [ ] Cover project with tests.
+- [x] Cover project with tests.
 - [ ] Run tests on github.
 - [ ] Add admin accounts:
   - [ ] Add `is_admin` field to `users` table or create completely different table for admins.

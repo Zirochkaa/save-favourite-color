@@ -7,3 +7,7 @@ class BaseConfig:
     TESTING = os.getenv("TESTING", False)
     SQLALCHEMY_TRACK_MODIFICATIONS = os.getenv("SQLALCHEMY_TRACK_MODIFICATIONS", False)
     SQLALCHEMY_DATABASE_URI = os.environ["DATABASE_URL"]
+
+
+class TestConfig(BaseConfig):
+    TESTING = True
