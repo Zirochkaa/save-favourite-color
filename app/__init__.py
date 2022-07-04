@@ -10,13 +10,13 @@ from flask_migrate import Migrate
 db = SQLAlchemy()
 
 
-def create_app():
+def create_app(config: str = "app.config.BaseConfig") -> Flask:
     app = Flask(__name__)
 
     app_folder = os.path.dirname(os.path.realpath(__file__))
     load_dotenv(os.path.join(app_folder, ".env"))
 
-    app.config.from_object("app.config.BaseConfig")
+    app.config.from_object(config)
 
     db.init_app(app)
 

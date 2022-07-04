@@ -53,6 +53,9 @@ def downgrade():
     op.execute("DELETE FROM users WHERE username='Ironman'")
     op.execute("DELETE FROM users WHERE username='Spiderman'")
     op.execute("DELETE FROM users WHERE username='Black Panter'")
+    op.execute("DELETE FROM users WHERE username='Nebula'")
+    op.execute("DELETE FROM users WHERE username='Rocket'")
+    op.execute("DELETE FROM users WHERE username='Moon Knight'")
     op.execute("DELETE FROM users WHERE username='Thor'")
 
     op.execute("DELETE FROM colors WHERE color='blue'")

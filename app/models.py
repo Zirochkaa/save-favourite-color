@@ -1,4 +1,6 @@
 from __future__ import annotations
+
+import random
 from typing import Optional, List
 from flask_login import UserMixin
 from sqlalchemy import ForeignKey
@@ -13,10 +15,10 @@ class Color(db.Model):
 
     users = db.relationship("User", backref="colors_lol")
 
-    def __repr__(self):
+    def __repr__(self):  # pragma: no cover
         return f"Color(color='{self.color}', is_active={self.is_active})"
 
-    def __str__(self):
+    def __str__(self):  # pragma: no cover
         return self.color
 
     # __repr__ = __str__
@@ -29,6 +31,16 @@ class Color(db.Model):
     def get_all_active_colors(cls) -> List[Color]:
         return cls.query.filter(cls.is_active.is_(True)).order_by(cls.color.asc()).all()
 
+    @classmethod
+    def get_random_color(cls, only_active: bool = True) -> Optional[Color]:
+        query = cls.query
+
+        if only_active is True:
+            query = query.filter(cls.is_active.is_(True))
+
+        all_colors = query.all()
+        return random.choice(all_colors) if all_colors else None
+
 
 class User(UserMixin, db.Model):
     __tablename__ = "users"
@@ -39,10 +51,19 @@ class User(UserMixin, db.Model):
     favourite_color = db.Column(db.String(20), ForeignKey("colors.color"))
     is_active = db.Column(db.Boolean, nullable=False, default=True)
 
-    def __repr__(self):
-        return f"User(id={self.id}, username='{self.username}', is_active={self.is_active})"
+    def __init__(self, username: str, password: str, favourite_color: str, is_active: bool = True, **kwargs):
+        super().__init__(**kwargs)
+        self.username = username
+        self.password = password  # TODO Use `werkzeug.security.generate_password_hash()` function.
+        self.favourite_color = favourite_color
+        self.is_active = is_active
 
-    def __str__(self):
+    def __repr__(self):  # pragma: no cover
+        return f"User(id={self.id}, username='{self.username}', favourite_color='{self.favourite_color}', " \
+               f"is_active={self.is_active}, " \
+               f"is_authenticated={self.is_authenticated}, is_anonymous={self.is_anonymous})"
+
+    def __str__(self):  # pragma: no cover
         return self.username
 
     def get_id(self) -> int:
@@ -55,6 +76,16 @@ class User(UserMixin, db.Model):
         self.favourite_color = favourite_color
         db.session.add(self)
         db.session.commit()
+
+    @classmethod
+    def get_random_user(cls, only_active: bool = True) -> Optional[User]:
+        query = cls.query
+
+        if only_active is True:
+            query = query.filter(cls.is_active.is_(True))
+
+        all_users = query.all()
+        return random.choice(all_users) if all_users else None
 
     @classmethod
     def signup(cls, username: str, password: str, favourite_color: str = "", is_active: bool = True) -> User:

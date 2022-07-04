@@ -29,7 +29,7 @@ def settings_post():
     favourite_color = request.form.get("color")
 
     if not Color.check_exists(color=favourite_color):
-        flash(f"We don't support '{favourite_color}' color yet")
+        flash(f"We do not support such ({favourite_color}) color yet")
         colors = Color.get_all_active_colors()
         return render_template("settings.html", colors=colors)
 
