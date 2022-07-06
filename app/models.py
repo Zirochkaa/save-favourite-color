@@ -4,6 +4,8 @@ import random
 from typing import Optional, List
 from flask_login import UserMixin
 from sqlalchemy import ForeignKey
+from werkzeug.security import check_password_hash, generate_password_hash
+
 from . import db
 
 
@@ -47,14 +49,14 @@ class User(UserMixin, db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(30), unique=True, nullable=False, index=True)
-    password = db.Column(db.String(30), nullable=False)
+    password = db.Column(db.String(102), nullable=False)
     favourite_color = db.Column(db.String(20), ForeignKey("colors.color"))
     is_active = db.Column(db.Boolean, nullable=False, default=True)
 
     def __init__(self, username: str, password: str, favourite_color: str, is_active: bool = True, **kwargs):
         super().__init__(**kwargs)
         self.username = username
-        self.password = password  # TODO Use `werkzeug.security.generate_password_hash()` function.
+        self.password = generate_password_hash(password)
         self.favourite_color = favourite_color
         self.is_active = is_active
 
@@ -70,7 +72,7 @@ class User(UserMixin, db.Model):
         return self.id
 
     def check_password(self, password: str) -> bool:
-        return self.password == password
+        return check_password_hash(self.password, password)
 
     def save_favourite_color(self, favourite_color: str):
         self.favourite_color = favourite_color

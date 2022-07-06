@@ -73,6 +73,7 @@ Below is a list of what needs to be done:
 - [x] Let users edit their favourite color.
 - [x] Cover project with tests.
 - [x] Run tests on github.
+- [x] Use `werkzeug.security` for passwords instead of plain text.
 - [ ] Add admin accounts:
   - [ ] Add `is_admin` field to `users` table ~~or create completely different table for admins~~.
   - [ ] Admin homepage should look like the one for regular user.

@@ -50,7 +50,7 @@ def test_login_client(app_with_migrations) -> FlaskLoginClient:
     Get test client with logged in user.
     """
     app_with_migrations.test_client_class = FlaskLoginClient
-    user = User.get_random_user()
+    user = User.query.filter_by(username="Gordon").first()
 
     with app_with_migrations.test_client(user=user) as client:
         yield client

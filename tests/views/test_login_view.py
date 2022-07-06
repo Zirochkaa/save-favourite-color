@@ -3,6 +3,7 @@ from typing import Optional
 import pytest
 from flask.testing import FlaskClient
 from flask_login import FlaskLoginClient, current_user, UserMixin
+from werkzeug.security import check_password_hash
 
 from app import db
 from app.models import User
@@ -72,17 +73,19 @@ def test_login_view_post_anonymous_user_correct_data(test_client: FlaskClient):
     # because before sending a request there is no `current_user`, so `current_user` is `None`.
     assert not current_user
 
-    user = User.get_random_user()
+    username = "Gordon"
+    password = "Ramsay"
 
-    response = test_client.post("/login", data={"username": user.username, "password": user.password})
+    response = test_client.post("/login", data={"username": username, "password": password})
 
+    user = User.query.filter_by(username=username).first()
     assert response.status_code == 302
     assert "<h1>Redirecting...</h1>" in response.text
     assert "/profile" == response.headers.get("Location", "")
     assert current_user and isinstance(current_user, UserMixin)
     assert current_user.username == user.username
     assert current_user.favourite_color == user.favourite_color
-    assert current_user.password == user.password
+    assert check_password_hash(current_user.password, password)
 
 
 @pytest.mark.parametrize(
@@ -124,8 +127,10 @@ def test_login_view_post_anonymous_user_not_active(test_client: FlaskClient):
     # because before sending a request there is no `current_user`, so `current_user` is `None`.
     assert not current_user
 
+    username = "Gordon"
+    password = "Ramsay"
     # By default, each test user has `is_active=True`. For this test we have to manually switch `is_active` to `False.
-    user = User.get_random_user()
+    user = User.query.filter_by(username=username).first()
     assert user.is_active is True
     user.is_active = False
     db.session.add(user)
@@ -134,7 +139,7 @@ def test_login_view_post_anonymous_user_not_active(test_client: FlaskClient):
     user = User.query.get(user.id)
     assert user.is_active is False
 
-    response = test_client.post("/login", data={"username": user.username, "password": user.password})
+    response = test_client.post("/login", data={"username": user.username, "password": password})
 
     assert response.status_code == 400
     check_menu(response=response, current_user=current_user)

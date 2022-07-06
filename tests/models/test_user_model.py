@@ -1,4 +1,5 @@
 import pytest
+from werkzeug.security import check_password_hash
 
 from app import db
 from app.models import User, Color
@@ -14,7 +15,7 @@ def test_new_user_default_is_active():
     user = User(username=username, password=password, favourite_color=favourite_color)
 
     assert user.username == username
-    assert user.password == password
+    assert check_password_hash(user.password, password)
     assert user.favourite_color == favourite_color
     assert user.is_active is True
 
@@ -30,7 +31,7 @@ def test_new_user():
     user = User(username=username, password=password, favourite_color=favourite_color, is_active=is_active)
 
     assert user.username == username
-    assert user.password == password
+    assert check_password_hash(user.password, password)
     assert user.favourite_color == favourite_color
     assert user.is_active == is_active
 
@@ -125,6 +126,6 @@ def test_signup(app_with_migrations):
 
     assert user
     assert user.username == username
-    assert user.password == password
+    assert check_password_hash(user.password, password)
     assert user.favourite_color == favourite_color
     assert user.is_active is True

@@ -3,6 +3,7 @@ from typing import Optional
 import pytest
 from flask.testing import FlaskClient
 from flask_login import FlaskLoginClient, current_user, UserMixin
+from werkzeug.security import check_password_hash
 
 from app.models import Color, User
 from tests.helpers import check_menu
@@ -83,7 +84,7 @@ def test_signup_view_post_anonymous_user_correct_data(test_client: FlaskClient):
     assert created_user and isinstance(created_user, UserMixin)
     assert created_user.username == username
     assert created_user.favourite_color == color.color
-    assert created_user.password == password
+    assert check_password_hash(created_user.password, password)
 
 
 @pytest.mark.parametrize(

@@ -22,8 +22,6 @@ def test_check_exists(app_with_migrations):
     """
     active_color = Color.get_random_color()
     color = Color.check_exists(color=active_color.color)
-    from time import sleep
-    sleep(5)
 
     assert color
     assert color.color == active_color.color
