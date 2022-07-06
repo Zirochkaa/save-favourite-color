@@ -61,9 +61,9 @@ Right now the site offers following features:
 - [x] Logout from user's account.
 - [x] For unknown urls show 404 page.
 - [ ] Admin accounts:
-  - [ ] Admins can see a list of all users with their info on admin's homepage instead of info about color like regular users see.
-  - [ ] Admins can add new colors to database from admin's homepage.
-  - [ ] Admins can deactivate users from admin's homepage.
+  - [ ] Admins can add new colors to database from appropriate separate page.
+  - [ ] Admins can see a list of all users with their info on appropriate separate page.
+  - [ ] Admins can deactivate users from appropriate separate page.
 - [ ] Share link to user's favourite color.
 
 ## TODOs
@@ -74,12 +74,12 @@ Below is a list of what needs to be done:
 - [x] Cover project with tests.
 - [x] Run tests on github.
 - [ ] Add admin accounts:
-  - [ ] Add `is_admin` field to `users` table or create completely different table for admins.
-  - [ ] Admin homepage should look different:
-    - it should not show info about color, instead it should list all users with their info;
+  - [ ] Add `is_admin` field to `users` table ~~or create completely different table for admins~~.
+  - [ ] Admin homepage should look like the one for regular user.
   - [ ] Allow admin to add colors to `colors` table (add link to appropriate page to the upper right corner).
-  - [ ] Allow admin to deactivate users from their homepage.
+  - [ ] Allow admin to see a list of all users with their info (add link to appropriate page to the upper right corner).
+  - [ ] Allow admin to deactivate users (add link to appropriate page to the upper right corner).
 - [ ] Let users share link to their favourite color. The page should include content from the one for logged-in user, but:
-  - text should be the following - "{username}'s favourite color is {color}.";
-  - block with color should remain;
+  - text should be the following - "{color} is the favourite color of {username}.";
+  - block with color filling should remain;
   - header should look like the one for not logged-in user.
