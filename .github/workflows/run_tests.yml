@@ -38,7 +38,7 @@ jobs:
         run: |
           python -m flake8 . --count --max-line-length=120 --statistics --exclude=migrations
       - name: Test with pytest
-        run: pytest
+        run: pytest --cov=app
         env:
           FLASK_SECRET_KEY: ${{ secrets.FLASK_SECRET_KEY }}
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
