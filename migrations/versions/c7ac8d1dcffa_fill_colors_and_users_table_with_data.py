@@ -20,8 +20,15 @@ depends_on = None
 
 
 def upgrade():
+    colors_table = sa.Table(
+        "colors",
+        sa.MetaData(),
+        sa.Column("color", sa.String(20), primary_key=True, index=True),
+        sa.Column("is_active", sa.Boolean, nullable=False, default=True)
+    )
+
     op.bulk_insert(
-        Color.__table__,
+        colors_table,
         [
             {
                 "color": "blue", "is_active": True
@@ -65,8 +72,18 @@ def upgrade():
         ]
     )
 
+    users_table = sa.Table(
+        "users",
+        sa.MetaData(),
+        sa.Column("id", sa.Integer, primary_key=True),
+        sa.Column("username", sa.String(30), unique=True, nullable=False, index=True),
+        sa.Column("password", sa.String(102), nullable=False),
+        sa.Column("favourite_color", sa.String(20), sa.ForeignKey("colors.color")),
+        sa.Column('is_active', sa.Boolean, nullable=False, default=True)
+    )
+
     op.bulk_insert(
-        User.__table__,
+        users_table,
         [
             {
                 "username": "Gordon",
