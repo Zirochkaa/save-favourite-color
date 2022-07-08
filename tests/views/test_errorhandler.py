@@ -8,11 +8,18 @@ from flask_login import FlaskLoginClient, current_user
 from tests.helpers import check_menu
 
 
-@pytest.mark.parametrize("client", ["test_client", "test_login_client"])
+@pytest.mark.parametrize(
+    "client",
+    (
+        "test_client",
+        "test_client_with_logged_in_user",
+        "test_client_with_logged_in_admin",
+    )
+)
 def test_page_not_found(client: str, request: FixtureRequest):
     """
-    GIVEN a (User, AnonymousUser)
-    WHEN a (User, AnonymousUser) sends GET request to page that doesn't exist
+    GIVEN an (AnonymousUser, User, Admin User)
+    WHEN an (AnonymousUser, User, Admin User) sends GET request to page that doesn't exist
     THEN `404` error code should be returned along with template for 404 page
     """
     client: Union[FlaskClient, FlaskLoginClient] = request.getfixturevalue(client)

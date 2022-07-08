@@ -1,19 +1,28 @@
 from typing import Optional
 
 import pytest
+from _pytest.fixtures import FixtureRequest
 from flask.testing import FlaskClient
 from flask_login import FlaskLoginClient, current_user
 
 from tests.helpers import check_menu
 
 
-def test_settings_view(test_login_client: FlaskLoginClient):
+@pytest.mark.parametrize(
+    "client",
+    (
+        "test_client_with_logged_in_user",
+        "test_client_with_logged_in_admin",
+    )
+)
+def test_settings_view(client: str, request: FixtureRequest):
     """
-    GIVEN a User
-    WHEN a User sends GET request to `/settings` page
+    GIVEN a (User, Admin User)
+    WHEN a (User, Admin User) sends GET request to `/settings` page
     THEN `/settings` page should be shown
     """
-    response = test_login_client.get("/settings")
+    client: FlaskLoginClient = request.getfixturevalue(client)
+    response = client.get("/settings")
 
     assert response.status_code == 200
     check_menu(response=response, current_user=current_user)
@@ -33,14 +42,22 @@ def test_settings_view_anonymous_user(test_client: FlaskClient):
     assert "/login" in response.headers.get("Location", "")
 
 
-def test_settings_view_post(test_login_client: FlaskLoginClient):
+@pytest.mark.parametrize(
+    "client",
+    (
+        "test_client_with_logged_in_user",
+        "test_client_with_logged_in_admin",
+    )
+)
+def test_settings_view_post(client: str, request: FixtureRequest):
     """
-    GIVEN a User
-    WHEN a User sends POST request to `/settings` page with correct `color` in request form
+    GIVEN a (User, Admin User)
+    WHEN a (User, Admin User) sends POST request to `/settings` page with correct `color` in request form
     THEN `User.favourite_color` should be updated with new `color` and `/profile` page should be shown
     """
     color = "purple"
-    response = test_login_client.post("/settings", data={"color": color})
+    client: FlaskLoginClient = request.getfixturevalue(client)
+    response = client.post("/settings", data={"color": color})
 
     assert response.status_code == 200
     assert current_user.favourite_color == color
@@ -57,13 +74,22 @@ def test_settings_view_post(test_login_client: FlaskLoginClient):
         ({"color": "gold"}, "We do not support such (gold) color yet"),
     )
 )
-def test_settings_view_post_incorrect_color(data: dict, error_text: str, test_login_client: FlaskLoginClient):
+@pytest.mark.parametrize(
+    "client",
+    (
+        "test_client_with_logged_in_user",
+        "test_client_with_logged_in_admin",
+    )
+)
+def test_settings_view_post_incorrect_color(data: dict, error_text: str, client: str, request: FixtureRequest):
     """
-    GIVEN a User
-    WHEN a User sends POST request to `/settings` page with incorrect `color` (empty, wrong value, etc) in request form
+    GIVEN a (User, Admin User)
+    WHEN a (User, Admin User) sends POST request to `/settings` page with incorrect `color` (empty, wrong value, etc)
+        in request form
     THEN `/settings` page should be shown with `We do not support such ({color}) color yet` text
     """
-    response = test_login_client.post("/settings", data=data)
+    client: FlaskLoginClient = request.getfixturevalue(client)
+    response = client.post("/settings", data=data)
 
     assert response.status_code == 200
     assert "Please pick up a new color" in response.text

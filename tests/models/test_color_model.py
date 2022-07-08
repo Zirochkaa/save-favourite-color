@@ -59,7 +59,7 @@ def test_get_all_active_colors_three_active_colors(app_with_migrations):
         `Color.get_all_active_colors()` function will be a list with amount of elements equal to the amount of
         active colors.
     """
-    # We have 13 test colors in db. We will set `is_active=False` to ten colors.
+    # We have 13 test colors in db. We will set `is_active=False` to first ten colors.
     list_of_all_colors = list(map(lambda c: c.color, Color.query.all()))
     Color.query.filter(Color.color.in_(list_of_all_colors[:-3])).update({Color.is_active: False})
     db.session.commit()
@@ -88,7 +88,7 @@ def test_get_random_color(app_with_migrations):
         update some colors to have `is_active=False` before test since all colors in db have
         `is_active=True` by default.
     """
-    # We have 13 test colors in db. We will set `is_active=False` to ten colors.
+    # We have 13 test colors in db. We will set `is_active=False` to first ten colors.
     list_of_all_colors = list(map(lambda c: c.color, Color.query.all()))
     Color.query.filter(Color.color.in_(list_of_all_colors[:-3])).update({Color.is_active: False})
     db.session.commit()

@@ -52,17 +52,27 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(102), nullable=False)
     favourite_color = db.Column(db.String(20), ForeignKey("colors.color"))
     is_active = db.Column(db.Boolean, nullable=False, default=True)
+    is_admin = db.Column(db.Boolean, nullable=False, default=False)
 
-    def __init__(self, username: str, password: str, favourite_color: str, is_active: bool = True, **kwargs):
+    def __init__(
+        self,
+        username: str,
+        password: str,
+        favourite_color: str,
+        is_active: bool = True,
+        is_admin: bool = False,
+        **kwargs
+    ):
         super().__init__(**kwargs)
         self.username = username
         self.password = generate_password_hash(password)
         self.favourite_color = favourite_color
         self.is_active = is_active
+        self.is_admin = is_admin
 
     def __repr__(self):  # pragma: no cover
         return f"User(id={self.id}, username='{self.username}', favourite_color='{self.favourite_color}', " \
-               f"is_active={self.is_active}, " \
+               f"is_active={self.is_active}, is_admin={self.is_admin}, " \
                f"is_authenticated={self.is_authenticated}, is_anonymous={self.is_anonymous})"
 
     def __str__(self):  # pragma: no cover
@@ -81,7 +91,10 @@ class User(UserMixin, db.Model):
 
     @classmethod
     def get_random_user(cls, only_active: bool = True) -> Optional[User]:
-        query = cls.query
+        """
+        Returns random user which is not an admin.
+        """
+        query = cls.query.filter(cls.is_admin.is_(False))
 
         if only_active is True:
             query = query.filter(cls.is_active.is_(True))
@@ -90,8 +103,11 @@ class User(UserMixin, db.Model):
         return random.choice(all_users) if all_users else None
 
     @classmethod
-    def signup(cls, username: str, password: str, favourite_color: str = "", is_active: bool = True) -> User:
-        user = cls(username=username, password=password, favourite_color=favourite_color, is_active=is_active)
+    def signup(cls, username: str, password: str, favourite_color: str) -> User:
+        """
+        Creates new user in db.
+        """
+        user = cls(username=username, password=password, favourite_color=favourite_color)
         db.session.add(user)
         db.session.commit()
         return user

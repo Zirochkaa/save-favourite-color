@@ -1,6 +1,7 @@
 from typing import Optional
 
 import pytest
+from _pytest.fixtures import FixtureRequest
 from flask.testing import FlaskClient
 from flask_login import FlaskLoginClient, current_user, UserMixin
 from werkzeug.security import check_password_hash
@@ -10,13 +11,21 @@ from app.models import User
 from tests.helpers import check_menu
 
 
-def test_login_view(test_login_client: FlaskLoginClient):
+@pytest.mark.parametrize(
+    "client",
+    (
+        "test_client_with_logged_in_user",
+        "test_client_with_logged_in_admin",
+    )
+)
+def test_login_view(client: str, request: FixtureRequest):
     """
-    GIVEN a User
-    WHEN a User sends GET request to `/login` url
+    GIVEN a (User, Admin User)
+    WHEN a (User, Admin User) sends GET request to `/login` url
     THEN redirect to `/profile` page should occur
     """
-    response = test_login_client.get("/login")
+    client: FlaskLoginClient = request.getfixturevalue(client)
+    response = client.get("/login")
 
     assert response.status_code == 302
     assert "<h1>Redirecting...</h1>" in response.text
@@ -47,16 +56,23 @@ def test_login_view_anonymous_user(test_client: FlaskClient):
         {"username": "Thor", "password": "Thor"},  # Correct data
     )
 )
-def test_login_view_post(data: Optional[dict], test_login_client: FlaskLoginClient):
+@pytest.mark.parametrize(
+    "client",
+    (
+        "test_client_with_logged_in_user",
+        "test_client_with_logged_in_admin",
+    )
+)
+def test_login_view_post(data: Optional[dict], client: str, request: FixtureRequest):
     """
-    GIVEN a User
-    WHEN a User sends POST request to `/login` url with both:
+    GIVEN a (User, Admin User)
+    WHEN a (User, Admin User) sends POST request to `/login` url with both:
         - correct `username` and `password` in request form;
         - with incorrect data in request form;
     THEN redirect to `/profile` page should occur
     """
-
-    response = test_login_client.post("/login", data=data)
+    client: FlaskLoginClient = request.getfixturevalue(client)
+    response = client.post("/login", data=data)
 
     assert response.status_code == 302
     assert "<h1>Redirecting...</h1>" in response.text

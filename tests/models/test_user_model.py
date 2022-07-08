@@ -5,7 +5,7 @@ from app import db
 from app.models import User, Color
 
 
-def test_new_user_default_is_active():
+def test_new_user_with_defaults():
     """
     For this test we are checking that `User` object is being created properly.
     """
@@ -18,6 +18,7 @@ def test_new_user_default_is_active():
     assert check_password_hash(user.password, password)
     assert user.favourite_color == favourite_color
     assert user.is_active is True
+    assert user.is_admin is False
 
 
 def test_new_user():
@@ -28,12 +29,15 @@ def test_new_user():
     password = "Peter"
     favourite_color = "green"
     is_active = False
-    user = User(username=username, password=password, favourite_color=favourite_color, is_active=is_active)
+    is_admin = True
+    user = User(username=username, password=password, favourite_color=favourite_color, is_active=is_active,
+                is_admin=is_admin)
 
     assert user.username == username
     assert check_password_hash(user.password, password)
     assert user.favourite_color == favourite_color
     assert user.is_active == is_active
+    assert user.is_admin == is_admin
 
 
 def test_get_id(test_user_object):
@@ -76,15 +80,34 @@ def test_get_random_user(app_with_migrations):
         update some users to have `is_active=False` before test since all users in db have `is_active=True` by default.
     """
     # We have 8 test users in db. We will set `is_active=False` to six users with ids in range(3, 9).
-    User.query.filter(User.id > 2).update({User.is_active: False})
+    User.query.filter(User.id >= 3).update({User.is_active: False})
     db.session.commit()
 
+    # ['Gordon', 'Ironman']
     active_users_usernames = list(map(lambda u: u.username, User.query.filter(User.is_active.is_(True)).all()))
+
+    # ['Spiderman', 'Black Panter', 'Nebula', 'Rocket', 'Moon Knight', 'Thor']
+    not_active_users_usernames = list(map(lambda u: u.username, User.query.filter(User.is_active.is_(False)).all()))
+
     user = User.get_random_user()
 
     assert user
     assert user.is_active is True
     assert user.username in active_users_usernames
+    assert user.username not in not_active_users_usernames
+
+
+def test_get_random_user_all_admins(app_with_migrations):
+    """
+    `User.get_random_user()` can't return admin user so random user have to be picked up from list of users in which
+        `is_admin` field is set to `False`.
+    If all users in db is admins meaning that they all have `is_admin=True`, then result should be `None`.
+    """
+    User.query.update({User.is_admin: True})
+    db.session.commit()
+    user = User.get_random_user()
+
+    assert user is None
 
 
 def test_get_random_user_all_not_active(app_with_migrations):
@@ -129,3 +152,4 @@ def test_signup(app_with_migrations):
     assert check_password_hash(user.password, password)
     assert user.favourite_color == favourite_color
     assert user.is_active is True
+    assert user.is_admin is False

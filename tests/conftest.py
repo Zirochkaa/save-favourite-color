@@ -45,12 +45,27 @@ def test_client(app_with_migrations) -> FlaskClient:
 
 
 @pytest.fixture(scope="function")
-def test_login_client(app_with_migrations) -> FlaskLoginClient:
+def test_client_with_logged_in_user(app_with_migrations) -> FlaskLoginClient:
     """
     Get test client with logged in user.
     """
     app_with_migrations.test_client_class = FlaskLoginClient
     user = User.query.filter_by(username="Gordon").first()
+
+    with app_with_migrations.test_client(user=user) as client:
+        yield client
+
+
+@pytest.fixture(scope="function")
+def test_client_with_logged_in_admin(app_with_migrations) -> FlaskLoginClient:
+    """
+    Get test client with logged in admin.
+    """
+    app_with_migrations.test_client_class = FlaskLoginClient
+    user = User.query.filter_by(username="Gordon").first()
+    user.is_admin = True
+    db.session.add(user)
+    db.session.commit()
 
     with app_with_migrations.test_client(user=user) as client:
         yield client

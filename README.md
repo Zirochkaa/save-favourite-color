@@ -75,8 +75,8 @@ Below is a list of what needs to be done:
 - [x] Run tests on github.
 - [x] Use `werkzeug.security` for passwords instead of plain text.
 - [ ] Add admin accounts:
-  - [ ] Add `is_admin` field to `users` table ~~or create completely different table for admins~~.
-  - [ ] Admin homepage should look like the one for regular user.
+  - [x] Add `is_admin` field to `users` table ~~or create completely different table for admins~~.
+  - [x] All pages for admin user should look the same as the ones for regular user.
   - [ ] Allow admin to add colors to `colors` table (add link to appropriate page to the upper right corner).
   - [ ] Allow admin to see a list of all users with their info (add link to appropriate page to the upper right corner).
   - [ ] Allow admin to deactivate users (add link to appropriate page to the upper right corner).
