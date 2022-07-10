@@ -80,7 +80,7 @@ Below is a list of what needs to be done:
   - [ ] Allow admin to add colors to `colors` table (add link to appropriate page to the upper right corner).
   - [ ] Allow admin to see a list of all users with their info (add link to appropriate page to the upper right corner).
   - [ ] Allow admin to deactivate users (add link to appropriate page to the upper right corner).
-- [ ] Let users share link to their favourite color. The page should include content from the one for logged-in user, but:
-  - text should be the following - "{color} is the favourite color of {username}.";
-  - block with color filling should remain;
-  - header should look like the one for not logged-in user.
+- [ ] Let users share link to their favourite color. This page should:
+  - have the following text at the center oh the screen - "{color} is the favourite color of {username}.";
+  - have a block with color filling;
+  - show headers like `404 page` meaning that some headers should be shown for logged in user (like `Setting`, `Log out`, etc) and some other headers should be shown for not logged in user (like `Log in`, `Sign up`, etc).
