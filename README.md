@@ -35,9 +35,9 @@ This repository contains final project for `Full Stack Web Development with Flas
    ```
 6. Run application:
    ```shell 
-   flask run
+   gunicorn -c gunicorn_config.py "app:create_app()"
    ```
-7. Go to [127.0.0.1:5000](http://127.0.0.1:5000) in your web browser.
+7. Go to [127.0.0.1:8080](http://127.0.0.1:8080) in your web browser.
 
 ## Tests
 
@@ -77,9 +77,9 @@ Below is a list of what needs to be done:
 - [ ] Add admin accounts:
   - [x] Add `is_admin` field to `users` table ~~or create completely different table for admins~~.
   - [x] All pages for admin user should look the same as the ones for regular user.
-  - [ ] Allow admin to add colors to `colors` table (add link to appropriate page to the upper right corner).
-  - [ ] Allow admin to see a list of all users with their info (add link to appropriate page to the upper right corner).
-  - [ ] Allow admin to deactivate users (add link to appropriate page to the upper right corner).
+  - [ ] Allow admin to add colors to `colors` table (link to appropriate page should be in admin panel).
+  - [ ] Allow admin to see a list of all users with their info (link to appropriate page should be in admin panel).
+  - [ ] Allow admin to deactivate users (link to appropriate page should be in admin panel).
 - [ ] Let users share link to their favourite color. This page should:
   - have the following text at the center oh the screen - "{color} is the favourite color of {username}.";
   - have a block with color filling;

@@ -1,0 +1,43 @@
+{% extends "general/structure.html" %}
+
+{% block login %}
+    {% if not current_user.is_authenticated %}
+        {% include 'auth/menu_pieces/login.html' %}
+    {% endif %}
+{% endblock login %}
+
+{% block signup %}
+    {% if not current_user.is_authenticated %}
+        {% include 'auth/menu_pieces/signup.html' %}
+    {% endif %}
+{% endblock signup %}
+
+{% block nav_greeting %}
+    {% if current_user.is_authenticated %}
+        {% include 'general/menu_pieces/nav_greeting.html' %}
+    {% endif %}
+{% endblock nav_greeting %}
+
+{% block settings %}
+    {% if current_user.is_authenticated %}
+        {% include 'profile/menu_pieces/settings.html' %}
+    {% endif %}
+{% endblock settings %}
+
+{% block admin %}
+    {% if current_user.is_authenticated and current_user.is_admin %}
+        {% include 'admin/menu_pieces/admin.html' %}
+    {% endif %}
+{% endblock admin %}
+
+{% block logout %}
+    {% if current_user.is_authenticated %}
+        {% include 'auth/menu_pieces/logout.html' %}
+    {% endif %}
+{% endblock logout %}
+
+{% block main %}
+<div class="content m-auto">
+    <h3 class="color-text">Page not found ;(</h3>
+</div>
+{% endblock main %}

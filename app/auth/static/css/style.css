@@ -1,0 +1,6 @@
+/* Login and logout pages styles
+-------------------------------------------------- */
+.form-signin,.form-signup {
+  max-width: 300px !important;
+  padding: 15px !important;
+}

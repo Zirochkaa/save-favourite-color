@@ -1,0 +1,52 @@
+html {
+  min-height: 100%;
+  min-width: 500px !important;
+}
+
+body {
+  background-color: #337def !important;
+}
+
+.container {
+  position: absolute !important;
+  top: 50% !important;
+  max-width: 100% !important;
+  transform: translateY(-50%) !important;
+  padding: 0px !important;
+}
+
+.content {
+  max-width: 500px !important;
+}
+
+h3 {
+  font-weight: 400 !important;
+}
+
+.color-box {
+  border: 20px solid white;
+}
+.color-text {
+  color: #fcc729 !important;
+}
+
+/* Sticky footer
+-------------------------------------------------- */
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px !important; /* Set the fixed height of the footer here */
+  min-height: 40px !important;
+  line-height: 40px !important; /* Vertically center the text there */
+}
+
+/* Navbar
+-------------------------------------------------- */
+.navbar {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  height: 40px !important;
+  min-height: 40px !important;
+  background-color: #337def !important;
+}

@@ -34,6 +34,10 @@ class Color(db.Model):
         return cls.query.filter(cls.is_active.is_(True)).order_by(cls.color.asc()).all()
 
     @classmethod
+    def get_all_colors(cls) -> List[Color]:
+        return cls.query.order_by(cls.color.asc()).all()
+
+    @classmethod
     def get_random_color(cls, only_active: bool = True) -> Optional[Color]:
         query = cls.query
 

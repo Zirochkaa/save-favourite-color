@@ -3,6 +3,7 @@ from flask import Flask
 from flask.testing import FlaskClient
 from flask_login import FlaskLoginClient
 from flask_migrate import upgrade
+from sqlalchemy import text
 from app import create_app, db
 from app.models import User
 
@@ -15,13 +16,17 @@ def app_empty_db() -> Flask:
     app = create_app(config="app.config.TestConfig")
 
     with app.app_context():
-        db.engine.execute("DROP TABLE IF EXISTS alembic_version")
+        with db.engine.connect() as conn:
+            conn.execute(text("DROP TABLE IF EXISTS alembic_version"))
+            conn.commit()
         db.session.remove()
         db.drop_all()
 
         yield app
 
-        db.engine.execute("DROP TABLE IF EXISTS alembic_version")
+        with db.engine.connect() as conn:
+            conn.execute(text("DROP TABLE IF EXISTS alembic_version"))
+            conn.commit()
         db.session.remove()
         db.drop_all()
 

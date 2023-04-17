@@ -1,0 +1,27 @@
+{% extends "general/structure.html" %}
+
+{% block main %}
+<div class="form-signin m-auto">
+    <form action="{{ url_for('auth.login_post') }}" method="post">
+        <h3 class="mb-3 color-text">Please sign in</h3>
+
+        <div class="form-group mb-3">
+            <label class="color-text" for="loginUsername">Username</label>
+            <input type="text" name="username" class="form-control" id="loginUsername" placeholder="put username here">
+        </div>
+
+        <div class="form-group mb-3">
+            <label class="color-text" for="loginPassword">Password</label>
+            <input type="password" name="password" class="form-control" id="loginPassword" placeholder="put password here">
+        </div>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <p class="text-bg-danger">{{ messages[0] }}</p>
+        {% endif %}
+        {% endwith %}
+
+        <button class="w-100 btn btn-lg" style="color:#337def;background-color:#fcc729" type="submit">Sign in</button>
+    </form>
+</div>
+{% endblock main %}

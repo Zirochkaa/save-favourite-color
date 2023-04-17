@@ -31,12 +31,20 @@ def create_app(config: str = "app.config.BaseConfig") -> Flask:
     def load_user(user_id: int):
         return User.query.get(user_id)
 
-    # blueprint for auth routes in our app
-    from app.views.auth import auth as auth_blueprint
-    app.register_blueprint(auth_blueprint)
+    # blueprint for auth parts of our app
+    from app.auth.auth import auth_bp
+    app.register_blueprint(auth_bp)
 
-    # blueprint for non-auth parts of app
-    from app.views.main import main as main_blueprint
-    app.register_blueprint(main_blueprint)
+    # blueprint for admin panel parts of our app
+    from app.admin.admin import admin_bp
+    app.register_blueprint(admin_bp)
+
+    # blueprint for profile parts of our app
+    from app.profile.profile import profile_bp
+    app.register_blueprint(profile_bp)
+
+    # blueprint for general parts of our app
+    from app.general.general import general_bp
+    app.register_blueprint(general_bp)
 
     return app
