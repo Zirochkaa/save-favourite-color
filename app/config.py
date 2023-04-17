@@ -11,4 +11,4 @@ class BaseConfig:
 
 class TestConfig(BaseConfig):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = "postgresql:///save_favourite_color_test"
+    SQLALCHEMY_DATABASE_URI = os.environ["DATABASE_URL_TEST"]

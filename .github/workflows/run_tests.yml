@@ -11,15 +11,18 @@ jobs:
 
     services:
       postgres:
-        image: postgres:14.4
+        image: postgres:15
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: postgres
+          POSTGRES_DB: save_favourite_color_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
         ports:
           - 5432:5432
-        # needed because the postgres container does not provide a healthcheck
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
       - uses: actions/checkout@v3
@@ -38,7 +41,8 @@ jobs:
         run: |
           python -m flake8 . --count --max-line-length=120 --statistics --exclude=migrations
       - name: Test with pytest
-        run: pytest --cov=app
+        run: pytest tests/ --cov=app
         env:
           FLASK_SECRET_KEY: ${{ secrets.FLASK_SECRET_KEY }}
-          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/postgres
+          DATABASE_URL: value  # `DATABASE_URL` is needed for `BaseConfig` class.
+          DATABASE_URL_TEST: postgresql://postgres:postgres@localhost:5432/save_favourite_color_test
