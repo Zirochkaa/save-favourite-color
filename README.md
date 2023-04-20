@@ -2,9 +2,9 @@
 
 # Save favourite color
 
-This repository contains final project for `Full Stack Web Development with Flask` course from [pirple.com](https://www.pirple.com/) website.
+This repository contains pet project designed for saving person's favourite color :)
 
-### Link to the working site is [here](https://save-favourite-color-viu5s.ondigitalocean.app/).
+### Link to the working site here - [color.zirochka.me](https://color.zirochka.me/).
 
 ## Run project locally
 
