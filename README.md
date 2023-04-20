@@ -61,6 +61,7 @@ Right now the site offers following features:
 - [x] Logout from user's account.
 - [x] For unknown urls show 404 page.
 - [ ] Admin accounts:
+  - [ ] Admins can see a list of all colors with their info on appropriate separate page.
   - [ ] Admins can add new colors to database from appropriate separate page.
   - [ ] Admins can see a list of all users with their info on appropriate separate page.
   - [ ] Admins can deactivate users from appropriate separate page.
@@ -77,6 +78,7 @@ Below is a list of what needs to be done:
 - [ ] Add admin accounts:
   - [x] Add `is_admin` field to `users` table ~~or create completely different table for admins~~.
   - [x] All pages for admin user should look the same as the ones for regular user.
+  - [ ] Allow admin to see a list of all colors with their info (link to appropriate page should be in admin panel).
   - [ ] Allow admin to add colors to `colors` table (link to appropriate page should be in admin panel).
   - [ ] Allow admin to see a list of all users with their info (link to appropriate page should be in admin panel).
   - [ ] Allow admin to deactivate users (link to appropriate page should be in admin panel).
