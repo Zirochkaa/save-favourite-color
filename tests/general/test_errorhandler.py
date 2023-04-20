@@ -5,7 +5,7 @@ from _pytest.fixtures import FixtureRequest
 from flask.testing import FlaskClient
 from flask_login import FlaskLoginClient, current_user
 
-from tests.helpers import check_menu
+from tests import helpers
 
 
 @pytest.mark.parametrize(
@@ -26,5 +26,5 @@ def test_page_not_found(client: str, request: FixtureRequest):
     response = client.get("/some_wrong_url")
 
     assert response.status_code == 404
-    check_menu(response=response, current_user=current_user)
-    assert '<h3 class="color-text">Page not found ;(</h3>' in response.text
+    helpers.check_menu(response=response, current_user=current_user)
+    assert helpers.page_not_found_h_tag in response.text

@@ -9,12 +9,15 @@ profile_a_tag = '<a class="nav-link color-text" href="/profile/">[Profile]</a>'
 login_a_tag = '<a class="nav-link color-text" href="/auth/login">[Log in]</a>'
 signup_a_tag = '<a class="nav-link color-text" href="/auth/signup">[Sign up]</a>'
 settings_a_tag = '<a class="nav-link color-text" href="/profile/settings/color">[Settings]</a>'
+admin_panel_a_tag = '<a class="nav-link color-text" href="/admin/">[Admin panel]</a>'
 logout_a_tag = '<a class="nav-link color-text" href="/auth/logout">[Log out]</a>'
 username_a_tag = '<a class="nav-link color-text">Hello, {username}</a>'
 
 
 redirect_h_tag = "<h1>Redirecting...</h1>"
 method_not_allowed_h_tag = "<h1>Method Not Allowed</h1>"
+
+page_not_found_h_tag = '<h3 class="color-text">Page not found ;(</h3>'
 
 
 def check_menu(response, current_user: Union[UserMixin, AnonymousUserMixin]):
@@ -32,6 +35,9 @@ def check_menu(response, current_user: Union[UserMixin, AnonymousUserMixin]):
         assert settings_a_tag in response.text
         assert logout_a_tag in response.text
         assert username_a_tag.format(username=current_user.username) in response.text
+
+        if current_user.is_admin:
+            assert admin_panel_a_tag in response.text
 
 
 # Admin endpoints

@@ -19,7 +19,7 @@ def test_profile_view(client: str, is_admin: bool, request: FixtureRequest):
     """
     GIVEN a (User, Admin User)
     WHEN a (User, Admin User) sends GET request to `/profile/` page
-    THEN `/profile` page should be shown
+    THEN `/profile/` page should be shown
     """
     client: FlaskLoginClient = request.getfixturevalue(client)
     response = client.get(helpers.profile_endpoint)
