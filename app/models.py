@@ -94,6 +94,10 @@ class User(UserMixin, db.Model):
         db.session.commit()
 
     @classmethod
+    def get_all_users(cls) -> List[User]:
+        return cls.query.order_by(cls.username.asc()).all()
+
+    @classmethod
     def get_random_user(cls, only_active: bool = True) -> Optional[User]:
         """
         Returns random user which is not an admin.

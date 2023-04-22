@@ -8,41 +8,40 @@ from flask_login import FlaskLoginClient, current_user
 from tests import helpers
 
 
-def test_admin_view_regular_user(test_client_with_logged_in_user: FlaskLoginClient):
+def test_admin_users_view_regular_user(test_client_with_logged_in_user: FlaskLoginClient):
     """
     GIVEN an User
-    WHEN an User sends GET request to `/admin/` page
+    WHEN an User sends GET request to `/admin/users` page
     THEN `404` error code should be returned along with template for 404 page
     """
-    response = test_client_with_logged_in_user.get(helpers.admin_panel_endpoint)
+    response = test_client_with_logged_in_user.get(helpers.admin_users_endpoint)
 
     assert response.status_code == 404
     helpers.check_menu(response=response, current_user=current_user)
     assert helpers.page_not_found_h_tag in response.text
 
 
-def test_admin_view_admin_user(test_client_with_logged_in_admin: FlaskLoginClient):
+def test_admin_users_view_admin_user(test_client_with_logged_in_admin: FlaskLoginClient):
     """
     GIVEN a Admin User
-    WHEN a Admin User sends GET request to `/admin/` page
-    THEN `/admin/` page should be shown
+    WHEN a Admin User sends GET request to `/admin/users` page
+    THEN `/admin/users` page should be shown
     """
-    response = test_client_with_logged_in_admin.get(helpers.admin_panel_endpoint)
+    response = test_client_with_logged_in_admin.get(helpers.admin_users_endpoint)
 
     assert current_user.is_admin is True
     assert response.status_code == 200
     helpers.check_menu(response=response, current_user=current_user)
-    assert '<h3 class="color-text">Colors section is <a class="color-text" href="#">here</a>.</h3>' in response.text
-    assert '<h3 class="color-text">Users section is <a class="color-text" href="#">here</a>.</h3>' in response.text
+    assert '<h3 class="color-text">Available users</h3>' in response.text
 
 
-def test_admin_view_anonymous_user(test_client: FlaskClient):
+def test_admin_users_view_anonymous_user(test_client: FlaskClient):
     """
     GIVEN an AnonymousUser
-    WHEN an AnonymousUser sends GET request to `/admin/` page
+    WHEN an AnonymousUser sends GET request to `/admin/users` page
     THEN redirect to `/auth/login` page should occur
     """
-    response = test_client.get(helpers.admin_panel_endpoint)
+    response = test_client.get(helpers.admin_users_endpoint)
 
     assert response.status_code == 302
     assert helpers.redirect_h_tag in response.text
@@ -57,14 +56,14 @@ def test_admin_view_anonymous_user(test_client: FlaskClient):
         "test_client_with_logged_in_admin"
     )
 )
-def test_profile_view_post(client: str, request: FixtureRequest):
+def test_admin_users_view_post(client: str, request: FixtureRequest):
     """
     GIVEN an (AnonymousUser, User, Admin User)
-    WHEN an (AnonymousUser, User, Admin User) sends POST request to `/admin/` page
+    WHEN an (AnonymousUser, User, Admin User) sends POST request to `/admin/users` page
     THEN `405` error code should be returned along with template for 405 page
     """
     client: Union[FlaskClient, FlaskLoginClient] = request.getfixturevalue(client)
-    response = client.post(helpers.admin_panel_endpoint)
+    response = client.post(helpers.admin_users_endpoint)
 
     assert response.status_code == 405
     assert helpers.method_not_allowed_h_tag in response.text

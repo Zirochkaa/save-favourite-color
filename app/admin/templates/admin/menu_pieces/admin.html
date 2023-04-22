@@ -1,3 +1,9 @@
-<li class="nav-item">
-    <a class="nav-link color-text" href="{{ url_for('admin.index') }}">[Admin panel]</a>
+<li class="nav-item dropdown">
+    <a class="nav-link color-text dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    [Admin panel]
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <li><a class="dropdown-item color-text" href="{{ url_for('admin.colors') }}">[Colors]</a></li>
+        <li><a class="dropdown-item color-text" href="{{ url_for('admin.users') }}">[Users]</a></li>
+    </ul>
 </li>

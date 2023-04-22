@@ -1,5 +1,6 @@
 # Admin template paths
-admin_panel_template_path = "admin/admin_panel.html"
+admin_colors_template_path = "admin/admin_colors.html"
+admin_users_template_path = "admin/admin_users.html"
 
 # Auth template paths
 login_template_path = "auth/login.html"

@@ -42,8 +42,7 @@ def test_signup_view_anonymous_user(test_client: FlaskClient):
     assert response.status_code == 200
     helpers.check_menu(response=response, current_user=current_user)
     assert '<h3 class="mb-3 color-text">Please sign up</h3>' in response.text
-    assert '<button class="w-100 btn btn-lg" style="color:#337def;background-color:#fcc729" ' \
-           'type="submit">Sign up</button>' in response.text
+    assert '<button class="w-100 btn btn-lg general-button" type="submit">Sign up</button>' in response.text
 
 
 @pytest.mark.parametrize(

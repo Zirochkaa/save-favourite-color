@@ -4,7 +4,7 @@ html {
 }
 
 body {
-  background-color: #337def !important;
+  background-color: #337def !important; /* Blue */
 }
 
 .container {
@@ -27,7 +27,7 @@ h3 {
   border: 20px solid white;
 }
 .color-text {
-  color: #fcc729 !important;
+  color: #fcc729 !important; /* Yellow */
 }
 
 /* Sticky footer
@@ -48,5 +48,15 @@ h3 {
   padding-bottom: 0 !important;
   height: 40px !important;
   min-height: 40px !important;
-  background-color: #337def !important;
+}
+
+.navbar a:hover {
+  background: #2572e8; /* Blue on hover */
+}
+
+/* Buttons
+-------------------------------------------------- */
+.general-button {
+    color: #337def !important; /* Blue */
+    background-color: #fcc729 !important; /* Yellow */
 }

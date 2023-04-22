@@ -26,11 +26,8 @@
 
 {% block main %}
 <div class="content m-auto">
-    <h3 class="color-text">This is admin panel :)</h3>
+    <h3 class="color-text">Available colors</h3>
     <br>
-    <br>
-    <br>
-    <h3 class="color-text">Colors section is <a class="color-text" href="#">here</a>.</h3>
     <table class="table color-text">
         <thead>
             <tr>
@@ -47,7 +44,7 @@
                     <td style="background-color:{{ color.color }}" class="align-middle"></td>
                     <td class="align-middle">{{ color.is_active }}</td>
                     <td>
-                        <button class="w-50 btn btn-sm" style="color:#337def;background-color:#fcc729" type="submit">
+                        <button class="w-50 btn btn-sm general-button" type="submit">
                             TBD
                         </button>
                     </td>
@@ -55,7 +52,5 @@
             {% endfor %}
         </tbody>
     </table>
-
-    <h3 class="color-text">Users section is <a class="color-text" href="#">here</a>.</h3>
 </div>
 {% endblock main %}

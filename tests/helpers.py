@@ -3,14 +3,32 @@ from typing import Union
 from flask_login import AnonymousUserMixin, UserMixin
 
 
+# Admin endpoints
+admin_colors_endpoint = "/admin/colors"
+admin_users_endpoint = "/admin/users"
+
+# Auth endpoints
+login_endpoint = "/auth/login"
+logout_endpoint = "/auth/logout"
+signup_endpoint = "/auth/signup"
+
+# General endpoints
+home_endpoint = "/"
+
+# Profile endpoints
+profile_endpoint = "/profile/"
+settings_endpoint = "/profile/settings/color"
+
+
 # HTML `a` tags for nav bar
-home_a_tag = '<a class="nav-link color-text" href="/">[Home]</a>'
-profile_a_tag = '<a class="nav-link color-text" href="/profile/">[Profile]</a>'
-login_a_tag = '<a class="nav-link color-text" href="/auth/login">[Log in]</a>'
-signup_a_tag = '<a class="nav-link color-text" href="/auth/signup">[Sign up]</a>'
-settings_a_tag = '<a class="nav-link color-text" href="/profile/settings/color">[Settings]</a>'
-admin_panel_a_tag = '<a class="nav-link color-text" href="/admin/">[Admin panel]</a>'
-logout_a_tag = '<a class="nav-link color-text" href="/auth/logout">[Log out]</a>'
+home_a_tag = f'<a class="nav-link color-text" href="{home_endpoint}">[Home]</a>'
+profile_a_tag = f'<a class="nav-link color-text" href="{profile_endpoint}">[Profile]</a>'
+login_a_tag = f'<a class="nav-link color-text" href="{login_endpoint}">[Log in]</a>'
+signup_a_tag = f'<a class="nav-link color-text" href="{signup_endpoint}">[Sign up]</a>'
+settings_a_tag = f'<a class="nav-link color-text" href="{settings_endpoint}">[Settings]</a>'
+admin_colors_a_tag = f'<a class="dropdown-item color-text" href="{admin_colors_endpoint}">[Colors]</a>'
+admin_users_a_tag = f'<a class="dropdown-item color-text" href="{admin_users_endpoint}">[Users]</a>'
+logout_a_tag = f'<a class="nav-link color-text" href="{logout_endpoint}">[Log out]</a>'
 username_a_tag = '<a class="nav-link color-text">Hello, {username}</a>'
 
 
@@ -37,20 +55,5 @@ def check_menu(response, current_user: Union[UserMixin, AnonymousUserMixin]):
         assert username_a_tag.format(username=current_user.username) in response.text
 
         if current_user.is_admin:
-            assert admin_panel_a_tag in response.text
-
-
-# Admin endpoints
-admin_panel_endpoint = "/admin/"
-
-# Auth endpoints
-login_endpoint = "/auth/login"
-logout_endpoint = "/auth/logout"
-signup_endpoint = "/auth/signup"
-
-# General endpoints
-home_endpoint = "/"
-
-# Profile endpoints
-profile_endpoint = "/profile/"
-settings_endpoint = "/profile/settings/color"
+            assert admin_colors_a_tag in response.text
+            assert admin_users_a_tag in response.text
