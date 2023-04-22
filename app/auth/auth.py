@@ -1,3 +1,5 @@
+from urllib.parse import urlparse, parse_qs
+
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_user, logout_user, current_user
 from app.models import Color, User
@@ -40,7 +42,12 @@ def login_post():
 
     was_logged_in = login_user(user, remember=remember)
     if was_logged_in is True:
-        # TODO Check for `next` parameter in `request.headers['referer']` and if it is present then redirect user there.
+        parsed_url = urlparse(request.headers.get('referer', ''))
+        parsed_query = parse_qs(parsed_url.query)
+
+        if parsed_query.get('next'):
+            return redirect(parsed_query['next'][0])
+
         return redirect(url_for(profile_endpoint))
 
     flash("Something went wrong during login process")
