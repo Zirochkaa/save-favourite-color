@@ -160,3 +160,19 @@ def test_login_view_post_anonymous_user_not_active(test_client: FlaskClient):
     assert response.status_code == 400
     check_menu(response=response, current_user=current_user)
     assert "Something went wrong during login process" in response.text
+
+
+def test_login_view_post_anonymous_user_next_parameter(test_client: FlaskClient):
+    """
+    GIVEN an AnonymousUser
+    WHEN an AnonymousUser sends POST request to `/auth/login` url with `next` url parameter and correct data in
+        request form;
+    THEN redirect to `next` url page should occur
+    """
+    referer = f'http://localhost:5000{helpers.login_endpoint}?next={helpers.settings_endpoint}'
+    response = test_client.post(helpers.login_endpoint, data={"username": "Thor", "password": "Thor"},
+                                headers={'Referer': referer})
+
+    assert response.status_code == 302
+    assert helpers.redirect_h_tag in response.text
+    assert helpers.settings_endpoint == response.headers.get("Location", "")
