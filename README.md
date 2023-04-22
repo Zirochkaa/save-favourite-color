@@ -1,4 +1,5 @@
 [![pytest](https://github.com/Zirochkaa/save-favourite-color/actions/workflows/run_tests.yml/badge.svg?branch=master)](https://github.com/Zirochkaa/save-favourite-color/actions/workflows/run_tests.yml)
+[![Coverage Status](https://coveralls.io/repos/github/Zirochkaa/save-favourite-color/badge.svg?branch=master)](https://coveralls.io/github/Zirochkaa/save-favourite-color?branch=master)
 
 # Save favourite color
 
