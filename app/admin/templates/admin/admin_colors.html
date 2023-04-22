@@ -28,13 +28,13 @@
 <div class="content m-auto">
     <h3 class="color-text">Available colors</h3>
     <br>
-    <table class="table color-text">
+    <table class="table color-text" style="width:450px;margin: 0 auto">
         <thead>
             <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Color</th>
-                <th scope="col">Is active</th>
-                <th scope="col">Action</th>
+                <th scope="col" style="width:150px">Name</th>
+                <th scope="col" style="width:100px">Color</th>
+                <th scope="col" style="width:100px">Is active</th>
+                <th scope="col" style="width:100px">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -43,8 +43,8 @@
                     <td scope="row" class="align-middle">{{ color.color }}</td>
                     <td style="background-color:{{ color.color }}" class="align-middle"></td>
                     <td class="align-middle">{{ color.is_active }}</td>
-                    <td>
-                        <button class="w-50 btn btn-sm general-button" type="submit">
+                    <td class="align-middle">
+                        <button class="w-40 btn btn-sm general-button" type="submit">
                             TBD
                         </button>
                     </td>
