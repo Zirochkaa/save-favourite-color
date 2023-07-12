@@ -152,7 +152,7 @@ def test_login_view_post_anonymous_user_not_active(test_client: FlaskClient):
     db.session.add(user)
     db.session.commit()
 
-    user = User.query.get(user.id)
+    user = db.session.get(User, user.id)
     assert user.is_active is False
 
     response = test_client.post(helpers.login_endpoint, data={"username": user.username, "password": password})

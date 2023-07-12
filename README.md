@@ -47,7 +47,7 @@ To run tests use following command:
    python -m pytest
    ```
 
-*Note*: tests will be run using `DATABASE_URL`, so if you don't want to lose your data, you may create new database and update `DATABASE_URL`.
+*Note*: tests will be run using `SQLALCHEMY_DATABASE_URI`, so you may need to create new database and update `SQLALCHEMY_DATABASE_URI`.
 
 If you want to check code coverage use following command:
    ```shell 

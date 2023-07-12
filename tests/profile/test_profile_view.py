@@ -27,7 +27,7 @@ def test_profile_view(client: str, is_admin: bool, request: FixtureRequest):
     assert current_user.is_admin is is_admin
     assert response.status_code == 200
     helpers.check_menu(response=response, current_user=current_user)
-    assert f"Your favourite color is {current_user.favourite_color}" in response.text
+    assert f"Your favourite color is {current_user.favourite_color}." in response.text
 
 
 def test_profile_view_anonymous_user(test_client: FlaskClient):

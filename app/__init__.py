@@ -29,7 +29,7 @@ def create_app(config: str = "app.config.BaseConfig") -> Flask:
 
     @login_manager.user_loader
     def load_user(user_id: int):
-        return User.query.get(user_id)
+        return db.session.get(User, user_id)
 
     # blueprint for auth parts of our app
     from app.auth.auth import auth_bp
