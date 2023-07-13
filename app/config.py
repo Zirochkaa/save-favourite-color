@@ -6,9 +6,12 @@ class BaseConfig:
     SECRET_KEY = os.environ["FLASK_SECRET_KEY"]
     TESTING = os.getenv("TESTING", False)
     SQLALCHEMY_TRACK_MODIFICATIONS = os.getenv("SQLALCHEMY_TRACK_MODIFICATIONS", False)
+
+
+class ProdConfig(BaseConfig):
     SQLALCHEMY_DATABASE_URI = os.environ["DATABASE_URL"]
 
 
 class TestConfig(BaseConfig):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL_TEST", "")
+    SQLALCHEMY_DATABASE_URI = os.environ["DATABASE_URL_TEST"]

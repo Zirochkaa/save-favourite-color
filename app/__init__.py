@@ -10,7 +10,7 @@ from flask_migrate import Migrate
 db = SQLAlchemy()
 
 
-def create_app(config: str = "app.config.BaseConfig") -> Flask:
+def create_app(config: str = "app.config.ProdConfig") -> Flask:
     app = Flask(__name__)
 
     app_folder = os.path.dirname(os.path.realpath(__file__))

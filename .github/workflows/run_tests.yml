@@ -44,7 +44,6 @@ jobs:
         run: pytest tests/ --cov=app
         env:
           FLASK_SECRET_KEY: ${{ secrets.FLASK_SECRET_KEY }}
-          DATABASE_URL: value  # `DATABASE_URL` is needed for `BaseConfig` class.
           DATABASE_URL_TEST: postgresql://postgres:postgres@localhost:5432/save_favourite_color_test
       - name: Upload coverage data to coveralls.io
         run: coveralls --service=github

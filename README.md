@@ -47,7 +47,7 @@ To run tests use following command:
    python -m pytest
    ```
 
-*Note*: tests will be run using `SQLALCHEMY_DATABASE_URI`, so you may need to create new database and update `SQLALCHEMY_DATABASE_URI`.
+*Note*: tests will be run using `DATABASE_URL_TEST`, so you need to create new database and update `DATABASE_URL_TEST`.
 
 If you want to check code coverage use following command:
    ```shell 
@@ -71,7 +71,7 @@ Right now the site offers following features:
 ## TODOs
 
 Below is a list of what needs to be done:
-- [x] Migrate from SQLite to PostgreSQL
+- [x] Migrate from SQLite to PostgreSQL.
 - [x] Let users edit their favourite color.
 - [x] Cover project with tests.
 - [x] Run tests on github.
