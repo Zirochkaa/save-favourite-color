@@ -9,9 +9,9 @@ class BaseConfig:
 
 
 class ProdConfig(BaseConfig):
-    SQLALCHEMY_DATABASE_URI = os.environ["DATABASE_URL"]
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
 
 
 class TestConfig(BaseConfig):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = os.environ["DATABASE_URL_TEST"]
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL_TEST")
