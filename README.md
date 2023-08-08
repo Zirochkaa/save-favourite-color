@@ -3,7 +3,7 @@
 
 # Save favourite color
 
-This repository contains pet project designed for saving person's favourite color :)
+This repository contains pet project - fastapi application designed for saving person's favourite color :)
 
 ### Link to the working site here - [color.zirochka.me](https://color.zirochka.me/).
 
@@ -20,7 +20,7 @@ This repository contains pet project designed for saving person's favourite colo
    ```
 4. Setup PostgreSQL. You have few options:
 
-    4.1. you can use any already existing PostgreSQL (in docker, in any cloud provider, etc):
+    4.1. you can use any already existing PostgreSQL (in docker, in any cloud provider, etc.):
       1. create new database;
       2. update `DATABASE_URL` in `.env` file;
 
@@ -74,7 +74,7 @@ Below is a list of what needs to be done:
 - [x] Migrate from SQLite to PostgreSQL.
 - [x] Let users edit their favourite color.
 - [x] Cover project with tests.
-- [x] Run tests on github.
+- [x] Run tests on GitHub.
 - [x] Use `werkzeug.security` for passwords instead of plain text.
 - [ ] Add admin accounts:
   - [x] Add `is_admin` field to `users` table ~~or create completely different table for admins~~.
@@ -86,4 +86,4 @@ Below is a list of what needs to be done:
 - [ ] Let users share link to their favourite color. This page should:
   - have the following text at the center oh the screen - "{color} is the favourite color of {username}.";
   - have a block with color filling;
-  - show headers like `404 page` meaning that some headers should be shown for logged in user (like `Setting`, `Log out`, etc) and some other headers should be shown for not logged in user (like `Log in`, `Sign up`, etc).
+  - show headers like `404 page` meaning that some headers should be shown for logged-in user (like `Setting`, `Log out`, etc.) and some other headers should be shown for not logged-in user (like `Log in`, `Sign up`, etc.).
