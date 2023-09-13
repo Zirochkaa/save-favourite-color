@@ -5,7 +5,7 @@
 
 This repository contains pet project - fastapi application designed for saving person's favourite color :)
 
-### Link to the working site here - [color.zirochka.me](https://color.zirochka.me/).
+### Link to the working site here - [color.zirochka.me](https://color.zirochka.me/) (currently turned off).
 
 ## Run project locally
 
