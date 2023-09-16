@@ -1,9 +1,11 @@
 import os
+
 from flask import Flask
 from flask.cli import load_dotenv
+from flask_debugtoolbar import DebugToolbarExtension
 from flask_login import LoginManager
-from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
 
 
 # Create SQLAlchemy object, so we can use it later in our models.
@@ -22,8 +24,25 @@ def create_app(config: str = "app.config.ProdConfig") -> Flask:
 
     Migrate(app, db)
 
+    toolbar = DebugToolbarExtension()
+    app.config["DEBUG_TB_INTERCEPT_REDIRECTS"] = False
+    app.config["DEBUG_TB_PANELS"] = (
+        "flask_debugtoolbar.panels.versions.VersionDebugPanel",
+        "flask_debugtoolbar.panels.timer.TimerDebugPanel",
+        "flask_debugtoolbar.panels.headers.HeaderDebugPanel",
+        "flask_debugtoolbar.panels.request_vars.RequestVarsDebugPanel",
+        "flask_debugtoolbar.panels.config_vars.ConfigVarsDebugPanel",
+        "flask_debugtoolbar.panels.template.TemplateDebugPanel",
+        "app.debugtoolbar.sqlalchemy_panel.SQLAlchemyDebugPanel",
+        "flask_debugtoolbar.panels.logger.LoggingPanel",
+        "flask_debugtoolbar.panels.route_list.RouteListDebugPanel",
+        "flask_debugtoolbar.panels.profiler.ProfilerDebugPanel",
+        "flask_debugtoolbar.panels.g.GDebugPanel",
+    )
+    toolbar.init_app(app)
+
     login_manager = LoginManager(app)
-    login_manager.login_view = 'auth.login'
+    login_manager.login_view = "auth.login"
 
     from .models import User
 

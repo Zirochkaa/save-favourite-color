@@ -12,7 +12,7 @@ This repository contains pet project - fastapi application designed for saving p
 1. Setup and activate your local python environment. [Here](https://www.digitalocean.com/community/tutorial_series/how-to-install-and-set-up-a-local-programming-environment-for-python-3) are few guides on how to do it.
 2. Install requirements:
    ```shell 
-   pip install requirements.txt
+   pip install -r requirements-local.txt
    ```
 3. Create `.env` file:
    ```shell 
@@ -76,6 +76,8 @@ Below is a list of what needs to be done:
 - [x] Cover project with tests.
 - [x] Run tests on GitHub.
 - [x] Use `werkzeug.security` for passwords instead of plain text.
+- [ ] Use [flask-debugtoolbar](https://flask-debugtoolbar.readthedocs.io/en/latest/).
+- [ ] Migrate from PostgreSQL to MongoDB.
 - [ ] Add admin accounts:
   - [x] Add `is_admin` field to `users` table ~~or create completely different table for admins~~.
   - [x] All pages for admin user should look the same as the ones for regular user.

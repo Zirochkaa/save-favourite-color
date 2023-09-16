@@ -2,10 +2,11 @@ import os
 
 
 class BaseConfig:
-    FLASK_DEBUG = os.getenv("FLASK_DEBUG", False)
+    DEBUG = os.getenv("FLASK_DEBUG", 'false').lower() == 'true'
     SECRET_KEY = os.environ["FLASK_SECRET_KEY"]
-    TESTING = os.getenv("TESTING", False)
-    SQLALCHEMY_TRACK_MODIFICATIONS = os.getenv("SQLALCHEMY_TRACK_MODIFICATIONS", False)
+    TESTING = os.getenv("TESTING", 'false').lower() == 'true'
+    SQLALCHEMY_RECORD_QUERIES = os.getenv("SQLALCHEMY_RECORD_QUERIES", 'false').lower() == 'true'
+    SQLALCHEMY_TRACK_MODIFICATIONS = os.getenv("SQLALCHEMY_TRACK_MODIFICATIONS", 'false').lower() == 'true'
 
 
 class ProdConfig(BaseConfig):
