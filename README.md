@@ -76,7 +76,7 @@ Below is a list of what needs to be done:
 - [x] Cover project with tests.
 - [x] Run tests on GitHub.
 - [x] Use `werkzeug.security` for passwords instead of plain text.
-- [ ] Use [flask-debugtoolbar](https://flask-debugtoolbar.readthedocs.io/en/latest/).
+- [x] Use [flask-debugtoolbar](https://flask-debugtoolbar.readthedocs.io/en/latest/).
 - [ ] Migrate from PostgreSQL to MongoDB.
 - [ ] Add admin accounts:
   - [x] Add `is_admin` field to `users` table ~~or create completely different table for admins~~.
