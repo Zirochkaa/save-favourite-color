@@ -8,14 +8,13 @@ else:
     sqlalchemy_available = True
 
 
+import itsdangerous
 from flask import request, current_app, abort, g
 from flask_debugtoolbar import module
 from flask_debugtoolbar.panels import DebugPanel
 from flask_debugtoolbar.utils import format_fname, format_sql
-import itsdangerous
 
-
-_ = lambda x: x
+_ = lambda x: x  # noqa: E731
 
 
 def query_signer():

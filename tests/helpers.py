@@ -2,7 +2,6 @@ from typing import Union
 
 from flask_login import AnonymousUserMixin, UserMixin
 
-
 # Admin endpoints
 admin_colors_endpoint = "/admin/colors"
 admin_users_endpoint = "/admin/users"

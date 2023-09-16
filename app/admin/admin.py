@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template
 from flask_login import login_required, current_user
+
 from app.models import Color, User
 from app.templates_paths import not_found_template_path, admin_colors_template_path, admin_users_template_path
 

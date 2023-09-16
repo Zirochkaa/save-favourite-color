@@ -4,6 +4,7 @@ from flask.testing import FlaskClient
 from flask_login import FlaskLoginClient
 from flask_migrate import upgrade
 from sqlalchemy import text
+
 from app import create_app, db
 from app.models import User
 

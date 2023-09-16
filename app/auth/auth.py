@@ -2,6 +2,7 @@ from urllib.parse import urlparse, parse_qs
 
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask_login import login_user, logout_user, current_user
+
 from app.models import Color, User
 from app.templates_paths import login_template_path, signup_template_path, after_signup_template_path
 
