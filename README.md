@@ -12,7 +12,7 @@ This repository contains pet project - fastapi application designed for saving p
 1. Setup and activate your local python environment. [Here](https://www.digitalocean.com/community/tutorial_series/how-to-install-and-set-up-a-local-programming-environment-for-python-3) are few guides on how to do it.
 2. Install requirements:
    ```shell 
-   pip install -r requirements-local.txt
+   pip install -r requirements-ci.txt
    ```
 3. Create `.env` file:
    ```shell 
